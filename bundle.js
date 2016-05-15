@@ -69,7 +69,7 @@
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _reducers = __webpack_require__(188);
+	var _reducers = __webpack_require__(189);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -21464,6 +21464,10 @@
 
 	var _reactRedux = __webpack_require__(160);
 
+	var _book_info = __webpack_require__(188);
+
+	var _book_info2 = _interopRequireDefault(_book_info);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21473,6 +21477,8 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by Michael on 15/05/16.
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+	// <li key={ book.title } className="list-group-item">Title: { book.title } - Description: { book.book_description }</li>
 
 	var BookList = function (_Component) {
 	    _inherits(BookList, _Component);
@@ -21487,14 +21493,7 @@
 	        key: 'renderList',
 	        value: function renderList() {
 	            return this.props.books.map(function (book) {
-	                return _react2.default.createElement(
-	                    'li',
-	                    { key: book.title, className: 'list-group-item' },
-	                    'Title: ',
-	                    book.title,
-	                    ' - Description: ',
-	                    book.book_description
-	                );
+	                return _react2.default.createElement(_book_info2.default, { book: book });
 	            });
 	        }
 	    }, {
@@ -21525,6 +21524,47 @@
 /* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function (props) {
+	    return _react2.default.createElement(
+	        "li",
+	        { key: props.book.title, className: "list-group-item" },
+	        _react2.default.createElement(
+	            "div",
+	            { className: "important" },
+	            _react2.default.createElement(
+	                "p",
+	                { className: "topic-title" },
+	                props.book.title
+	            )
+	        ),
+	        _react2.default.createElement(
+	            "div",
+	            { className: "section" },
+	            _react2.default.createElement(
+	                "p",
+	                { className: "attention" },
+	                props.book.book_description
+	            )
+	        )
+	    );
+	};
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -21533,7 +21573,7 @@
 
 	var _redux = __webpack_require__(167);
 
-	var _reducer_books = __webpack_require__(189);
+	var _reducer_books = __webpack_require__(190);
 
 	var _reducer_books2 = _interopRequireDefault(_reducer_books);
 
@@ -21547,7 +21587,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 189 */
+/* 190 */
 /***/ function(module, exports) {
 
 	"use strict";

@@ -5,11 +5,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import BookInfo from '../components/book_info';
+
+// <li key={ book.title } className="list-group-item">Title: { book.title } - Description: { book.book_description }</li>
+
 class BookList extends Component {
     renderList() {
         return this.props.books.map((book) => {
             return (
-                <li key={ book.title } className="list-group-item">Title: { book.title } - Description: { book.book_description }</li>
+                <BookInfo key={ book.key } book={ book } />
             );
         });
     }
