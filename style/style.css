@@ -1,0 +1,16 @@
+.list-group-item {
+    cursor: pointer;
+}
+
+.list-group-item:hover {
+    background-color: bisque;
+}
+
+.list-group {
+    margin: 20px;
+    float: left;
+}
+
+/*.list-group-container {*/
+    /*float: left;*/
+/*}*/

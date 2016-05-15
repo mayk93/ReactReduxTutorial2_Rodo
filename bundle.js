@@ -21493,16 +21493,20 @@
 	        key: 'renderList',
 	        value: function renderList() {
 	            return this.props.books.map(function (book) {
-	                return _react2.default.createElement(_book_info2.default, { book: book });
+	                return _react2.default.createElement(_book_info2.default, { key: book.key, book: book });
 	            });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                'ul',
-	                { className: 'list-group col-sm-4' },
-	                this.renderList()
+	                'div',
+	                { className: 'list-group-container' },
+	                _react2.default.createElement(
+	                    'ul',
+	                    { className: 'list-group col-sm-4' },
+	                    this.renderList()
+	                )
 	            );
 	        }
 	    }]);
@@ -21533,7 +21537,7 @@
 	exports.default = function (props) {
 	    return _react2.default.createElement(
 	        "li",
-	        { key: props.book.title, className: "list-group-item" },
+	        { key: props.key, className: "list-group-item" },
 	        _react2.default.createElement(
 	            "div",
 	            { className: "important" },
