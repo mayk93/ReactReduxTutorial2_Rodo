@@ -21575,9 +21575,9 @@
 	exports.default = function (props) {
 	    return _react2.default.createElement(
 	        "li",
-	        { onClick: function onClick() {
+	        { id: props.book.title, onClick: function onClick() {
 	                return props.click_handler(props.book);
-	            }, key: props.key, className: "list-group-item" },
+	            }, key: props.book.title, className: "list-group-item" },
 	        _react2.default.createElement(
 	            "div",
 	            { className: "important" },
@@ -21609,7 +21609,7 @@
 /* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -21620,6 +21620,12 @@
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(160);
+
+	var _book_info = __webpack_require__(189);
+
+	var _book_info2 = _interopRequireDefault(_book_info);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21641,24 +21647,52 @@
 	    }
 
 	    _createClass(BookDetail, [{
-	        key: "render",
+	        key: 'click_handler',
+	        value: function click_handler() {
+	            document.getElementsByClassName("selected_book").style.backgroundColor = "gold";
+	        }
+	    }, {
+	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement(
-	                "div",
-	                null,
-	                _react2.default.createElement(
-	                    "p",
-	                    { className: "topic-title" },
-	                    "Selected Book"
-	                )
-	            );
+	            if (this.props.book != null) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'selected_book' },
+	                    _react2.default.createElement(
+	                        'h3',
+	                        null,
+	                        'Selected Book'
+	                    ),
+	                    _react2.default.createElement(_book_info2.default, {
+	                        key: this.props.book.key,
+	                        book: this.props.book,
+	                        click_handler: this.click_handler
+	                    })
+	                );
+	            } else {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'selected_book' },
+	                    _react2.default.createElement(
+	                        'h3',
+	                        null,
+	                        'No book selected'
+	                    )
+	                );
+	            }
 	        }
 	    }]);
 
 	    return BookDetail;
 	}(_react.Component);
 
-	exports.default = BookDetail;
+	function mapStateToProps(state) {
+	    return {
+	        book: state.activeBook
+	    };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(BookDetail);
 
 /***/ },
 /* 191 */

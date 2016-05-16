@@ -11,6 +11,9 @@
     float: left;
 }
 
-/*.list-group-container {*/
-    /*float: left;*/
-/*}*/
+.selected_book {
+    padding: 10px;
+    margin: 20px;
+    float: right;
+    background-color: beige;
+}
