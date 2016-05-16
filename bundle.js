@@ -69,7 +69,7 @@
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _reducers = __webpack_require__(189);
+	var _reducers = __webpack_require__(190);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -21464,7 +21464,11 @@
 
 	var _reactRedux = __webpack_require__(160);
 
-	var _book_info = __webpack_require__(188);
+	var _redux = __webpack_require__(167);
+
+	var _index = __webpack_require__(188);
+
+	var _book_info = __webpack_require__(189);
 
 	var _book_info2 = _interopRequireDefault(_book_info);
 
@@ -21492,8 +21496,13 @@
 	    _createClass(BookList, [{
 	        key: 'renderList',
 	        value: function renderList() {
+	            var click_handler = this.props.selectBook;
 	            return this.props.books.map(function (book) {
-	                return _react2.default.createElement(_book_info2.default, { key: book.key, book: book });
+	                return _react2.default.createElement(_book_info2.default, {
+	                    key: book.key,
+	                    book: book,
+	                    click_handler: click_handler
+	                });
 	            });
 	        }
 	    }, {
@@ -21515,17 +21524,37 @@
 	}(_react.Component);
 
 	function mapStateToProps(state) {
-	    // Set props of Book list:
+	    // Set props of BookList.
 	    // Return value is props of the class.
 	    return {
 	        books: state.books
 	    };
 	}
 
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(BookList);
+	function mapDispatchToProps(dispatch) {
+	    // Results of mapDispatchToProps ends up as prop of BookList.
+	    // Pass result of selectBook to reducers.
+	    return (0, _redux.bindActionCreators)({ selectBook: _index.selectBook }, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(BookList);
 
 /***/ },
 /* 188 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.selectBook = selectBook;
+	function selectBook(book) {
+	    console.log("Selected book: ", book.title);
+	}
+
+/***/ },
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21537,7 +21566,9 @@
 	exports.default = function (props) {
 	    return _react2.default.createElement(
 	        "li",
-	        { key: props.key, className: "list-group-item" },
+	        { onClick: function onClick() {
+	                return props.click_handler(props.book);
+	            }, key: props.key, className: "list-group-item" },
 	        _react2.default.createElement(
 	            "div",
 	            { className: "important" },
@@ -21566,7 +21597,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 189 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21577,7 +21608,7 @@
 
 	var _redux = __webpack_require__(167);
 
-	var _reducer_books = __webpack_require__(190);
+	var _reducer_books = __webpack_require__(191);
 
 	var _reducer_books2 = _interopRequireDefault(_reducer_books);
 
@@ -21591,7 +21622,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 190 */
+/* 191 */
 /***/ function(module, exports) {
 
 	"use strict";
