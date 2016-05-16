@@ -69,7 +69,7 @@
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _reducers = __webpack_require__(190);
+	var _reducers = __webpack_require__(191);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -21413,6 +21413,10 @@
 
 	var _book_list2 = _interopRequireDefault(_book_list);
 
+	var _book_detail = __webpack_require__(190);
+
+	var _book_detail2 = _interopRequireDefault(_book_detail);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21436,7 +21440,8 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_book_list2.default, null)
+	        _react2.default.createElement(_book_list2.default, null),
+	        _react2.default.createElement(_book_detail2.default, null)
 	      );
 	    }
 	  }]);
@@ -21550,7 +21555,11 @@
 	});
 	exports.selectBook = selectBook;
 	function selectBook(book) {
-	    console.log("Selected book: ", book.title);
+	    // The returned action. That is, an action with a type property.
+	    return {
+	        type: "BOOK_SELECTED",
+	        payload: book
+	    };
 	}
 
 /***/ },
@@ -21600,6 +21609,61 @@
 /* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by Michael on 16/05/16.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+	var BookDetail = function (_Component) {
+	    _inherits(BookDetail, _Component);
+
+	    function BookDetail() {
+	        _classCallCheck(this, BookDetail);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(BookDetail).apply(this, arguments));
+	    }
+
+	    _createClass(BookDetail, [{
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(
+	                "div",
+	                null,
+	                _react2.default.createElement(
+	                    "p",
+	                    { className: "topic-title" },
+	                    "Selected Book"
+	                )
+	            );
+	        }
+	    }]);
+
+	    return BookDetail;
+	}(_react.Component);
+
+	exports.default = BookDetail;
+
+/***/ },
+/* 191 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -21608,21 +21672,26 @@
 
 	var _redux = __webpack_require__(167);
 
-	var _reducer_books = __webpack_require__(191);
+	var _reducer_books = __webpack_require__(192);
 
 	var _reducer_books2 = _interopRequireDefault(_reducer_books);
+
+	var _reducer_active_book = __webpack_require__(193);
+
+	var _reducer_active_book2 = _interopRequireDefault(_reducer_active_book);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var rootReducer = (0, _redux.combineReducers)({
 	  // state: (state = {}) => state
-	  books: _reducer_books2.default
+	  books: _reducer_books2.default,
+	  activeBook: _reducer_active_book2.default
 	});
 
 	exports.default = rootReducer;
 
 /***/ },
-/* 191 */
+/* 192 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -21633,6 +21702,28 @@
 
 	exports.default = function () {
 	    return [{ title: "Book 0", book_description: "A cool book" }, { title: "Book 1", book_description: "A interesting book" }, { title: "Book 2", book_description: "A fascinating book" }, { title: "Book 3", book_description: "A good book" }, { title: "Book 4", book_description: "An awesome book" }];
+	};
+
+/***/ },
+/* 193 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function () {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	    var action = arguments[1];
+
+	    switch (action.type) {
+	        case "BOOK_SELECTED":
+	            return action.payload;
+	        default:
+	            return state;
+	    }
 	};
 
 /***/ }
